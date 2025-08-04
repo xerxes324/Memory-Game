@@ -28,3 +28,20 @@
     right: 5%;
     font-size: 30px;
 }
+
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-template-rows: repeat(2,1fr);
+    row-gap: 2rem;
+    column-gap: 2rem;
+    background-color: black;
+    min-height: 100vh;
+    padding: 30px;
+}
+
+.cards > div{
+    background-color: white;
+}
+
