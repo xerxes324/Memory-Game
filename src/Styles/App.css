@@ -1,0 +1,30 @@
+.container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: pink;
+}
+
+.header{
+    position: relative;
+    text-align: center;
+    background-color: blue;
+    padding: 3rem;
+}
+
+.title{
+    position: absolute;
+    text-align: center;
+    background-color: gray;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.info{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5%;
+    font-size: 30px;
+}
