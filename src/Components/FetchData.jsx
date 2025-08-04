@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-
-function RenderImages(props){
-    console.log(props.URLArray);
-}
+import Cards from "./Cards";
 
 
 export default function FetchData(){
@@ -18,17 +15,20 @@ export default function FetchData(){
             const results = data.results;
 
             results.forEach(element => {
+                // console.log(element);
                 pokemonURLArray.push(element.url);
             });
 
             setPokemonData(pokemonURLArray);
         }
         apiFn();
+        // console.log(pokemonURLArray,"is thje arrya");
+        // console.log(pokemonData, "IS THE POPKEMON DATA")
     }, [])
 
     return(
         <>
-            <RenderImages URLArray = {pokemonData} />
+            <Cards URLArray = {pokemonData} />
         </>
         
     )
