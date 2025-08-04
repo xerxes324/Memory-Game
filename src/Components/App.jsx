@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Cards from "./Cards";
 import FetchData from "./FetchData";
 
 function HeaderDisplay(props){
@@ -15,9 +14,6 @@ function HeaderDisplay(props){
   )
 }
 
-
-
-
 function App() {
   
 
@@ -29,11 +25,7 @@ function App() {
       <div className="header">
         <HeaderDisplay score = {score} best = {best} />
       </div>
-
-      <div className="cards">
-        <FetchData/>
-        <Cards/>
-      </div>
+      <FetchData/>
     </div>
   )
 }
