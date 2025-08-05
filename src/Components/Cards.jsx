@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FetchableDevEnvironment } from "vite";
 
 function DisplayCards(props){
     console.log(props.pokemonURL);
@@ -13,22 +14,23 @@ function GeneratePokemon(props){
     useEffect( ()=>{
 
         if ( props.URLArray.length !== 0){
-            const pokemonArray = [];
 
-            const fetchFn = async(pokemon) => {
-                const req = await fetch(pokemon);
-                const data = await req.json();
-                // console.log("the data is,", data.sprites.front_default);
-                pokemonArray.push(data.sprites.front_default);
-            }
-    
-            for ( let i = 0 ; i < 10 ; i++){
-                fetchFn(props.URLArray[i]);
+            const wrapperFn = async () => {
+
+                const fetchAllPokemon = async () =>{
+                    const imagesArray = await Promise.all(
+                        props.URLArray.map(url => fetch(url).then(res => res.json()))
+                    )
+                    return imagesArray;
+                }
+
+                const imagesCall = await fetchAllPokemon();
+                setPokemon(imagesCall);
             }
 
-            setPokemon(pokemonArray);
-            // console.log("the array is : ", pokemonArray);
+            wrapperFn();
         }
+
     },[props.URLArray])
 
     return(
