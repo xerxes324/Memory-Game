@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import FetchData from "./FetchData";
-// import FetchData from "./FetchData";
-
-
 
 function DisplayCards(props){
-    console.log("final array is",props.pokemonURL);
+    // console.log("final array is",props.pokemonURL);
+    // console.log(props.arr,"is the array")
+    // console.log(props.pokemonURL,"is the pokemon")
 
     return(
         <>
             {props.pokemonURL.map((url,index) => 
-                <div className= "cardContainer" key={index} onClick={props.shuffle}> 
+                
+                <div className= "cardContainer" key={index} onClick={()=> props.clickfunction(props.arr)}> 
                     <img className = "pokemonImageStyle" src = {url}></img>
                 </div>
             )}
@@ -23,10 +23,10 @@ function GeneratePokemon(props){
 
     const [pokemon, setPokemon] = useState([]);
 
-
     const shuffle = (arr) => {
+    
+        console.log(arr, "is the array bro");
 
-        //shuffling
         let currentIndex = arr.length;
         while (currentIndex !== 0){
             let randomIndex = Math.floor(Math.random() * currentIndex);
@@ -34,9 +34,8 @@ function GeneratePokemon(props){
             [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
         }
 
-        return arr;
+        setPokemon(arr);
         
-
     }
 
     useEffect( ()=>{
@@ -50,13 +49,11 @@ function GeneratePokemon(props){
                         props.URLArray.map(url => fetch(url).then(res => res.json()).then(data=> data.sprites.front_default))
                     )
                     
-                    let temp = shuffle(imagesArray)
-
-                    return temp;
+                    shuffle(imagesArray)
                 }
 
-                const imagesCall = await fetchAllPokemon();
-                setPokemon(imagesCall);
+                await fetchAllPokemon();
+
             }
 
             wrapperFn();
@@ -66,12 +63,12 @@ function GeneratePokemon(props){
 
     return(
         <>
-            <DisplayCards pokemonURL = {pokemon} clickfunction = {shuffle}/>
+            <DisplayCards pokemonURL = {pokemon} clickfunction = {shuffle} arr={pokemon}/>
         </>
     )
 }
 
-export default function Cards(props){
+export default function CardsMain(props){
     // console.log(props.URLArray,"is the CARDS array");
 
     return(

@@ -4,7 +4,7 @@ import FetchData from "./FetchData";
 function HeaderDisplay(props){
   return(
     <>
-      <h1 className="title"> Memory Game </h1>  
+      <h1 className="title"> MG </h1>  
 
       <div className="info">
         <p> Score : {props.score} </p>
