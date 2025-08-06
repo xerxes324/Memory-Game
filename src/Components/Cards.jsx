@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import FetchData from "./FetchData";
+// import FetchData from "./FetchData";
+
+
 
 function DisplayCards(props){
     console.log("final array is",props.pokemonURL);
@@ -6,7 +10,7 @@ function DisplayCards(props){
     return(
         <>
             {props.pokemonURL.map((url,index) => 
-                <div className= "cardContainer" key={index} > 
+                <div className= "cardContainer" key={index} onClick={props.shuffle}> 
                     <img className = "pokemonImageStyle" src = {url}></img>
                 </div>
             )}
@@ -16,9 +20,23 @@ function DisplayCards(props){
 
 
 function GeneratePokemon(props){
-    
-    // console.log(props.URLArray, "is the array");
+
     const [pokemon, setPokemon] = useState([]);
+
+
+    const shuffle = (arr) => {
+
+        //shuffling
+        let currentIndex = arr.length;
+        while (currentIndex !== 0){
+            let randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
+        }
+
+        return arr;
+
+    }
 
     useEffect( ()=>{
 
@@ -30,7 +48,10 @@ function GeneratePokemon(props){
                     const imagesArray = await Promise.all(
                         props.URLArray.map(url => fetch(url).then(res => res.json()).then(data=> data.sprites.front_default))
                     )
-                    return imagesArray;
+                    
+                    let temp = shuffle(imagesArray)
+
+                    return temp;
                 }
 
                 const imagesCall = await fetchAllPokemon();
@@ -44,7 +65,7 @@ function GeneratePokemon(props){
 
     return(
         <>
-            <DisplayCards pokemonURL = {pokemon}/>
+            <DisplayCards pokemonURL = {pokemon} clickfunction = {shuffle}/>
         </>
     )
 }
