@@ -37,7 +37,7 @@
     row-gap: 2rem;
     column-gap: 2rem;
     background-color: black;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     padding: 30px;
 }
 
@@ -45,3 +45,11 @@
     background-color: white;
 }
 
+.pokemonImageStyle{
+    height: 100%;
+    width: 100%;
+}
+
+.cardContainer{
+    border-radius: 5px;
+}
