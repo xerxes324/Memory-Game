@@ -35,6 +35,7 @@ function GeneratePokemon(props){
         }
 
         return arr;
+        
 
     }
 
