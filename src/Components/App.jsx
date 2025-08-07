@@ -4,7 +4,7 @@ import FetchData from "./FetchData";
 function HeaderDisplay(props){
   return(
     <>
-      <h1 className="title"> MG </h1>  
+      <h1 className="title"> Memory Game </h1>  
 
       <div className="info">
         <p> Score : {props.score} </p>
@@ -18,14 +18,15 @@ function App() {
   
 
   const [score, setScore] = useState(0)
+  console.log("setscore invoked.");
   const [best, setBest] = useState(0)
   
   return(
     <div className="container">
       <div className="header">
-        <HeaderDisplay score = {score} best = {best} />
+        <HeaderDisplay score = {score} best = {best}/>
       </div>
-      <FetchData/>
+      <FetchData currentscore = {score} setscore = {setScore}/>
     </div>
   )
 }
