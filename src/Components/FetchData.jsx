@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CardsMain from "./Cards";
 
-export default function FetchData(){
+export default function FetchData(props){
 
     const [pokemonData, setPokemonData] = useState([]);
  
@@ -23,10 +23,10 @@ export default function FetchData(){
         // console.log(pokemonURLArray,"is thje arrya");
         
     }, [])
-    console.log(pokemonData, "IS THE POPKEMON DATA")
+    // console.log(pokemonData, "IS THE POPKEMON DATA")
     return(
         <>
-            <CardsMain URLArray = {pokemonData} />
+            <CardsMain URLArray = {pokemonData} currentscore = {props.currentscore} setscore =  {props.setscore}/>
         </>
         
     )
