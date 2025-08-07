@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import FetchData from "./FetchData";
 
 function DisplayCards(props){
-    // console.log("final array is",props.pokemonURL);
-    // console.log(props.arr,"is the array")
-    // console.log(props.pokemonURL,"is the pokemon")
-
+    
+    const tempArray = props.arr.map(x => x)
+    console.log("currentscore is: ", props.currentscore)
     return(
         <>
             {props.pokemonURL.map((url,index) => 
                 
-                <div className= "cardContainer" key={index} onClick={()=> props.clickfunction(props.arr)}> 
+                <div className= "cardContainer" key={index} onClick={() => {
+                    props.clickfunction(tempArray);
+                    props.setscore(props.currentscore + 1);
+                }}> 
                     <img className = "pokemonImageStyle" src = {url}></img>
                 </div>
             )}
@@ -19,13 +20,14 @@ function DisplayCards(props){
 }
 
 
-function GeneratePokemon(props){
 
+function GeneratePokemon(props){
+    // console.log("rendering...")
     const [pokemon, setPokemon] = useState([]);
 
     const shuffle = (arr) => {
     
-        console.log(arr, "is the array bro");
+        // console.log(arr, "is the array bro");
 
         let currentIndex = arr.length;
         while (currentIndex !== 0){
@@ -33,7 +35,7 @@ function GeneratePokemon(props){
             currentIndex--;
             [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
         }
-
+        // console.log(arr, "is the shuffled array bro")
         setPokemon(arr);
         
     }
@@ -63,19 +65,18 @@ function GeneratePokemon(props){
 
     return(
         <>
-            <DisplayCards pokemonURL = {pokemon} clickfunction = {shuffle} arr={pokemon}/>
+            <DisplayCards pokemonURL = {pokemon} clickfunction = {shuffle} arr={pokemon}  setscore =  {props.setscore} currentscore = {props.currentscore} />
         </>
     )
 }
 
 export default function CardsMain(props){
-    // console.log(props.URLArray,"is the CARDS array");
-
+    console.log("currentscore", props.currentscore);
     return(
 
         <>
             <div className="cards">
-                <GeneratePokemon URLArray = {props.URLArray}/>
+                <GeneratePokemon URLArray = {props.URLArray} setscore =  {props.setscore} currentscore = {props.currentscore} />
             </div>
         </>
     )
