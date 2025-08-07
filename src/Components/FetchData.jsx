@@ -4,7 +4,7 @@ import CardsMain from "./Cards";
 export default function FetchData(props){
 
     const [pokemonData, setPokemonData] = useState([]);
- 
+
     useEffect( () => {
         const pokemonURLArray = [];
         const apiFn = async () => {
@@ -26,7 +26,7 @@ export default function FetchData(props){
     // console.log(pokemonData, "IS THE POPKEMON DATA")
     return(
         <>
-            <CardsMain URLArray = {pokemonData} currentscore = {props.currentscore} setscore =  {props.setscore}/>
+            <CardsMain currentbest = {props.currentbest} setbest = {props.setbest} URLArray = {pokemonData} currentscore = {props.currentscore} setscore =  {props.setscore}/>
         </>
         
     )
