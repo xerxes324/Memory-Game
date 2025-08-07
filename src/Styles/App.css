@@ -2,20 +2,20 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: pink;
+    background-color: black;
 }
 
 .header{
     position: relative;
     text-align: center;
-    background-color: blue;
+    background-color: white;
+    color: black;
     padding: 3rem;
 }
 
 .title{
     position: absolute;
     text-align: center;
-    background-color: gray;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
@@ -34,15 +34,15 @@
     display: grid;
     grid-template-columns: repeat(5,1fr);
     grid-template-rows: repeat(2,1fr);
-    row-gap: 2rem;
-    column-gap: 2rem;
+    row-gap: 4rem;
+    column-gap: 4rem;
     background-color: black;
-    /* min-height: 100vh; */
-    padding: 30px;
+    padding: 9rem;
 }
 
 .cards > div{
-    background-color: white;
+    background-color:yellow;
+    border-radius: 20px;
 }
 
 .pokemonImageStyle{
