@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 
+
+const checkActive = (activeCards, url) =>{
+    return activeCards.includes(url)
+}
+
+
 function DisplayCards(props){
-    
+
+    const [activeCards, setActiveCards] = useState([]);
+    const arrayofActiveCards = activeCards;
     const tempArray = props.arr.map(x => x)
-    console.log("currentscore is: ", props.currentscore)
+
     return(
         <>
             {props.pokemonURL.map((url,index) => 
@@ -11,6 +19,25 @@ function DisplayCards(props){
                 <div className= "cardContainer" key={index} onClick={() => {
                     props.clickfunction(tempArray);
                     props.setscore(props.currentscore + 1);
+                    
+                    let urlActive = checkActive(activeCards, url);
+
+                    if ( urlActive === true){
+                        // card has already been clicked 
+
+                        let newCurrentBest = Math.max(props.currentbest, props.currentscore);
+                        props.setbest(newCurrentBest);
+                        props.setscore(0);
+                        setActiveCards([]);
+                        
+                    }
+
+                    else{
+                        // card hasnt been clicked
+                        arrayofActiveCards.push(url);
+                        setActiveCards(arrayofActiveCards);
+                    }
+
                 }}> 
                     <img className = "pokemonImageStyle" src = {url}></img>
                 </div>
@@ -22,12 +49,10 @@ function DisplayCards(props){
 
 
 function GeneratePokemon(props){
-    // console.log("rendering...")
+
     const [pokemon, setPokemon] = useState([]);
 
     const shuffle = (arr) => {
-    
-        // console.log(arr, "is the array bro");
 
         let currentIndex = arr.length;
         while (currentIndex !== 0){
@@ -35,7 +60,7 @@ function GeneratePokemon(props){
             currentIndex--;
             [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
         }
-        // console.log(arr, "is the shuffled array bro")
+
         setPokemon(arr);
         
     }
@@ -65,18 +90,18 @@ function GeneratePokemon(props){
 
     return(
         <>
-            <DisplayCards pokemonURL = {pokemon} clickfunction = {shuffle} arr={pokemon}  setscore =  {props.setscore} currentscore = {props.currentscore} />
+            <DisplayCards currentbest = {props.currentbest} setbest = {props.setbest} pokemonURL = {pokemon} clickfunction = {shuffle} arr={pokemon}  setscore =  {props.setscore} currentscore = {props.currentscore} />
         </>
     )
 }
 
 export default function CardsMain(props){
-    console.log("currentscore", props.currentscore);
+
     return(
 
         <>
             <div className="cards">
-                <GeneratePokemon URLArray = {props.URLArray} setscore =  {props.setscore} currentscore = {props.currentscore} />
+                <GeneratePokemon currentbest = {props.currentbest} setbest = {props.setbest} URLArray = {props.URLArray} setscore =  {props.setscore} currentscore = {props.currentscore} />
             </div>
         </>
     )
